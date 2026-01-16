@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agn Yala Safa4i | Wild Safari Adventure</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         * {
             margin: 0;
@@ -21,6 +20,10 @@
             --safari-gold: #ffd700;
             --safari-dark: #1a1a1a;
             --safari-light: #f5f5dc;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -47,6 +50,7 @@
             padding: 15px 0;
             border-bottom: 2px solid var(--safari-brown);
             animation: slideDown 0.8s ease-out;
+            backdrop-filter: blur(10px);
         }
 
         @keyframes slideDown {
@@ -161,15 +165,55 @@
             font-size: 24px;
             cursor: pointer;
             transition: transform 0.3s ease;
+            z-index: 1001;
         }
 
         .mobile-menu-btn:hover {
             transform: rotate(90deg);
         }
 
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--safari-brown);
+            color: white;
+            border: 2px solid var(--safari-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .scroll-to-top:hover {
+            background-color: var(--safari-gold);
+            color: var(--safari-dark);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
         /* Hero Section with Enhanced Animation */
         .hero {
             height: 100vh;
+            min-height: 600px;
+            max-height: 1200px;
             background: linear-gradient(rgba(13, 26, 0, 0.7), rgba(13, 26, 0, 0.5)), 
                         url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1926&q=80');
             background-size: cover;
@@ -177,7 +221,7 @@
             display: flex;
             align-items: center;
             text-align: center;
-            padding-top: 80px;
+            padding: 80px 0 40px;
             position: relative;
             overflow: hidden;
         }
@@ -208,10 +252,11 @@
             margin: 0 auto;
             position: relative;
             z-index: 1;
+            padding: 0 20px;
         }
 
         .hero h1 {
-            font-size: 4.5rem;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
             margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 3px;
@@ -264,7 +309,7 @@
         }
 
         .hero p {
-            font-size: 1.5rem;
+            font-size: clamp(1rem, 2vw, 1.5rem);
             margin-bottom: 40px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             animation: fadeInUp 2s 0.5s both;
@@ -286,7 +331,7 @@
             background-color: var(--safari-brown);
             color: white;
             padding: 15px 40px;
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
             font-weight: 700;
             text-decoration: none;
             border-radius: 50px;
@@ -332,7 +377,7 @@
 
         /* Safari Animals Section with Enhanced Animation */
         .safari-animals {
-            padding: 100px 0;
+            padding: 80px 0;
             background-color: #0d1a00;
             position: relative;
             overflow: hidden;
@@ -361,12 +406,13 @@
 
         .section-title {
             text-align: center;
-            font-size: 2.8rem;
-            margin-bottom: 60px;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            margin-bottom: 40px;
             color: var(--safari-gold);
             position: relative;
             text-transform: uppercase;
             animation: titleGlow 3s infinite alternate;
+            padding: 0 15px;
         }
 
         @keyframes titleGlow {
@@ -381,7 +427,7 @@
         .section-title:after {
             content: '';
             position: absolute;
-            width: 150px;
+            width: 100px;
             height: 4px;
             background-color: var(--safari-brown);
             bottom: -15px;
@@ -392,17 +438,18 @@
 
         @keyframes lineWidth {
             0% {
-                width: 100px;
+                width: 80px;
             }
             100% {
-                width: 200px;
+                width: 150px;
             }
         }
 
         .animals-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 0 15px;
         }
 
         .animal-card {
@@ -428,7 +475,7 @@
         }
 
         .animal-img {
-            height: 250px;
+            height: 220px;
             width: 100%;
             background-size: cover;
             background-position: center;
@@ -483,9 +530,9 @@
             width: 100%;
         }
 
-        /* Safari Experience Section (New Section) */
+        /* Safari Experience Section */
         .safari-experience {
-            padding: 100px 0;
+            padding: 80px 0;
             background-color: #142a00;
             position: relative;
             overflow: hidden;
@@ -513,14 +560,15 @@
 
         .experience-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 15px;
         }
 
         .experience-card {
             background-color: #0d1a00;
             border-radius: 10px;
-            padding: 40px 30px;
+            padding: 30px 20px;
             text-align: center;
             border: 2px solid transparent;
             transition: all 0.5s ease;
@@ -565,7 +613,7 @@
         }
 
         .experience-icon {
-            font-size: 4rem;
+            font-size: 3.5rem;
             color: var(--safari-gold);
             margin-bottom: 20px;
             display: inline-block;
@@ -582,25 +630,26 @@
         }
 
         .experience-card h3 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             margin-bottom: 15px;
             color: var(--safari-gold);
         }
 
-        /* Gallery Section (New Section) */
+        /* Gallery Section */
         .safari-gallery {
-            padding: 100px 0;
+            padding: 80px 0;
             background-color: #0d1a00;
         }
 
         .gallery-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+            gap: 15px;
+            padding: 0 15px;
         }
 
         .gallery-item {
-            height: 250px;
+            height: 220px;
             border-radius: 10px;
             overflow: hidden;
             position: relative;
@@ -639,6 +688,8 @@
             align-items: center;
             opacity: 0;
             transition: opacity 0.5s ease;
+            padding: 15px;
+            text-align: center;
         }
 
         .gallery-item:hover .gallery-overlay {
@@ -647,7 +698,7 @@
 
         .gallery-overlay h3 {
             color: var(--safari-gold);
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             margin-bottom: 10px;
             transform: translateY(20px);
             transition: transform 0.5s ease;
@@ -659,7 +710,7 @@
 
         /* Contact Section with Enhanced Animation */
         .contact {
-            padding: 100px 0;
+            padding: 80px 0;
             background-color: #0d1a00;
             position: relative;
             overflow: hidden;
@@ -689,19 +740,20 @@
         .contact-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 50px;
+            gap: 40px;
+            padding: 0 15px;
         }
 
         .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 25px;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
             opacity: 0;
             transform: translateX(-50px);
             transition: all 0.5s ease;
@@ -713,16 +765,17 @@
         }
 
         .contact-icon {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: var(--safari-gold);
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             background-color: #142a00;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
+            flex-shrink: 0;
         }
 
         .contact-item:hover .contact-icon {
@@ -733,7 +786,7 @@
 
         .contact-form {
             background-color: #142a00;
-            padding: 40px;
+            padding: 30px;
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             transform: translateY(50px);
@@ -761,7 +814,7 @@
 
         .form-control {
             width: 100%;
-            padding: 15px;
+            padding: 12px;
             background-color: #0d1a00;
             border: 1px solid var(--safari-brown);
             border-radius: 5px;
@@ -794,7 +847,7 @@
         /* Footer */
         footer {
             background-color: #080f00;
-            padding: 60px 0 30px;
+            padding: 50px 0 25px;
             border-top: 2px solid var(--safari-brown);
             position: relative;
             overflow: hidden;
@@ -825,10 +878,11 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 30px;
+            margin-bottom: 30px;
             position: relative;
             z-index: 1;
+            padding: 0 15px;
         }
 
         .footer-logo {
@@ -843,8 +897,8 @@
 
         .footer-links h3 {
             color: var(--safari-gold);
-            margin-bottom: 20px;
-            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
             position: relative;
             display: inline-block;
         }
@@ -854,7 +908,7 @@
             position: absolute;
             bottom: -5px;
             left: 0;
-            width: 50px;
+            width: 40px;
             height: 2px;
             background-color: var(--safari-gold);
         }
@@ -864,7 +918,7 @@
         }
 
         .footer-links li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             transform: translateX(0);
             transition: transform 0.3s ease;
         }
@@ -877,6 +931,7 @@
             color: #ccc;
             text-decoration: none;
             transition: color 0.3s ease;
+            font-size: 0.95rem;
         }
 
         .footer-links a:hover {
@@ -885,13 +940,14 @@
 
         .social-icons {
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
         }
 
         .social-icon {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             background-color: #142a00;
             border-radius: 50%;
             display: flex;
@@ -928,12 +984,13 @@
 
         .copyright {
             text-align: center;
-            padding-top: 30px;
+            padding-top: 20px;
             border-top: 1px solid #2d5016;
             color: #aaa;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             position: relative;
             z-index: 1;
+            padding: 20px 15px 0;
         }
 
         /* Floating particles animation */
@@ -965,77 +1022,132 @@
         }
 
         /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 100%;
+            }
+        }
+
         @media (max-width: 992px) {
             .hero h1 {
                 font-size: 3.5rem;
+            }
+            
+            .experience-container {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             }
         }
 
         @media (max-width: 768px) {
             .header-container {
-                flex-direction: column;
-                gap: 15px;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            .logo-text {
+                font-size: 22px;
+            }
+            
+            .logo-icon {
+                font-size: 24px;
+            }
+            
+            nav {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 70%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: rgba(13, 26, 0, 0.95);
+                backdrop-filter: blur(10px);
+                z-index: 1000;
+                padding: 80px 30px 30px;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            }
+            
+            nav.active {
+                display: block;
+                transform: translateX(0);
+                animation: slideInRight 0.3s ease-out;
+            }
+            
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                }
+                to {
+                    transform: translateX(0);
+                }
             }
             
             nav ul {
-                gap: 15px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            nav a {
+                font-size: 1.2rem;
+                padding: 10px 0;
+                display: block;
+                width: 100%;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 100px 0 40px;
             }
             
             .hero h1 {
                 font-size: 2.8rem;
             }
             
-            .hero p {
-                font-size: 1.2rem;
-            }
-            
             .section-title {
                 font-size: 2.2rem;
             }
             
-            .mobile-menu-btn {
-                display: block;
-                position: absolute;
-                top: 20px;
-                right: 20px;
+            .contact-container {
+                grid-template-columns: 1fr;
             }
             
-            nav {
-                display: none;
-                width: 100%;
-                margin-top: 15px;
-            }
-            
-            nav.active {
-                display: block;
-                animation: slideInRight 0.5s ease-out;
-            }
-            
-            @keyframes slideInRight {
-                from {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-            }
-            
-            nav ul {
+            .footer-content {
                 flex-direction: column;
-                align-items: center;
-                gap: 10px;
+                gap: 30px;
+            }
+            
+            .scroll-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
             }
         }
 
         @media (max-width: 576px) {
+            .hero {
+                padding: 100px 0 30px;
+                min-height: 500px;
+            }
+            
             .hero h1 {
                 font-size: 2.2rem;
+                letter-spacing: 2px;
             }
             
             .hero p {
                 font-size: 1rem;
+                margin-bottom: 30px;
             }
             
             .cta-button {
@@ -1045,6 +1157,132 @@
             
             .section-title {
                 font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+            
+            .animals-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .experience-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 10px;
+            }
+            
+            .gallery-item {
+                height: 180px;
+            }
+            
+            .contact-form {
+                padding: 20px;
+            }
+            
+            .footer-logo, .footer-links {
+                min-width: 100%;
+            }
+            
+            .scroll-to-top {
+                bottom: 15px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .container, .hero-content, .animals-grid, .experience-container, 
+            .gallery-container, .contact-container, .footer-content {
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .logo-text {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .animal-img {
+                height: 180px;
+            }
+            
+            .gallery-item {
+                height: 150px;
+            }
+            
+            .contact-form {
+                padding: 15px;
+            }
+        }
+
+        /* Landscape orientation for mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero {
+                min-height: auto;
+                height: auto;
+                padding: 120px 0 60px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 0.9rem;
+                margin-bottom: 20px;
+            }
+            
+            .cta-button {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+            
+            .scroll-to-top {
+                bottom: 10px;
+                right: 10px;
+                width: 35px;
+                height: 35px;
+                font-size: 14px;
+            }
+        }
+
+        /* High-resolution displays */
+        @media (min-width: 1400px) {
+            .container {
+                max-width: 1300px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .scroll-to-top,
+            .mobile-menu-btn,
+            .particles,
+            nav,
+            .cta-button:hover:before,
+            .experience-card:hover:before {
+                display: none !important;
+            }
+            
+            body {
+                background-color: white;
+                color: black;
+            }
+            
+            .animal-card, .experience-card, .contact-form {
+                break-inside: avoid;
             }
         }
     </style>
@@ -1074,6 +1312,11 @@
             </nav>
         </div>
     </header>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -1299,7 +1542,7 @@
         // Create floating particles
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
-            const particleCount = 30;
+            const particleCount = window.innerWidth < 768 ? 15 : 30;
             
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
@@ -1337,10 +1580,59 @@
             if (mainNav.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
                 icon.classList.add('fa-times');
+                document.body.style.overflow = 'hidden';
             } else {
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
+                document.body.style.overflow = 'auto';
             }
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Scroll to Top Button
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+            
+            // Header background on scroll
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.backgroundColor = 'rgba(13, 26, 0, 0.95)';
+                header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.3)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.backgroundColor = 'rgba(13, 26, 0, 0.9)';
+                header.style.boxShadow = 'none';
+                header.style.backdropFilter = 'none';
+            }
+            
+            // Parallax effect for hero
+            const hero = document.querySelector('.hero');
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            hero.style.backgroundPosition = `center ${rate}px`;
+        });
+
+        // Scroll to top when button is clicked
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
 
         // Smooth scrolling for anchor links
@@ -1359,6 +1651,7 @@
                         const icon = mobileMenuBtn.querySelector('i');
                         icon.classList.remove('fa-times');
                         icon.classList.add('fa-bars');
+                        document.body.style.overflow = 'auto';
                     }
                     
                     window.scrollTo({
@@ -1425,26 +1718,6 @@
             observer.observe(el);
         });
 
-        // Header background on scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.backgroundColor = 'rgba(13, 26, 0, 0.95)';
-                header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.3)';
-                header.style.backdropFilter = 'blur(10px)';
-            } else {
-                header.style.backgroundColor = 'rgba(13, 26, 0, 0.9)';
-                header.style.boxShadow = 'none';
-                header.style.backdropFilter = 'none';
-            }
-            
-            // Parallax effect for hero
-            const hero = document.querySelector('.hero');
-            const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.5;
-            hero.style.backgroundPosition = `center ${rate}px`;
-        });
-
         // Form input focus effects
         document.querySelectorAll('.form-control').forEach(input => {
             input.addEventListener('focus', function() {
@@ -1481,6 +1754,32 @@
             setTimeout(() => {
                 document.body.style.opacity = '1';
             }, 100);
+            
+            // Set min date for safari booking to today
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const minDate = tomorrow.toISOString().split('T')[0];
+            document.getElementById('date').setAttribute('min', minDate);
+        });
+
+        // Handle window resize for better responsiveness
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function() {
+                // Recreate particles on resize
+                document.getElementById('particles').innerHTML = '';
+                createParticles();
+                
+                // Close mobile menu on larger screens
+                if (window.innerWidth > 768 && mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                    mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                    document.body.style.overflow = 'auto';
+                }
+            }, 250);
         });
     </script>
 </body>
